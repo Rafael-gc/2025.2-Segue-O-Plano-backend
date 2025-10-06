@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: segueoplano-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: segueoplano_db
+      MYSQL_USER: segueoplano_user
+      MYSQL_PASSWORD: segueoplano_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build: .
+    container_name: segueoplano-backend
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - db
+
+volumes:
+  db_data:
