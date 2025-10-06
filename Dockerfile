@@ -1,12 +1,14 @@
-FROM node:18
+FROM python:3.11
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY ./src ./src
 
-EXPOSE 3000
+ENV PYTHONPATH=/app/src
 
-CMD ["npm", "run", "dev"]
+EXPOSE 8000
+
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

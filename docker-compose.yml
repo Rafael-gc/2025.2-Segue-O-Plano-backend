@@ -16,12 +16,11 @@ services:
   backend:
     build: .
     container_name: segueoplano-backend
-    command: npm run dev
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
     ports:
-      - "3000:3000"
+      - "8000:8000"
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./src:/app/src
     depends_on:
       - db
 
