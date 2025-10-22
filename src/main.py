@@ -1,5 +1,11 @@
 from fastapi import FastAPI
-from routes.health import router as health_router
+from pacientes.router import router as pacientes_router
+from database import init_db
 
 app = FastAPI()
-app.include_router(health_router)
+app.include_router(pacientes_router)
+
+
+@app.on_event("startup")
+def on_startup():
+    init_db()
