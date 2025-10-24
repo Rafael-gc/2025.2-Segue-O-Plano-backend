@@ -1,43 +1,43 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
-from sqlmodel import Session
+from sqlalchemy.orm import Session
 
 from database import get_session
-from models.models import PatientCreate, PatientRead, PatientUpdate
+from pacientes.schema import PacienteCreate, PacienteRead, PacienteUpdate
 from . import repository
 
 router = APIRouter(prefix="/pacientes", tags=["pacientes"])
 
 
-@router.get("/", response_model=List[PatientRead])
-def list_patients(skip: int = 0, limit: int = 100, db: Session = Depends(get_session)):
-    return repository.list_patients(db, skip=skip, limit=limit)
+@router.get("/", response_model=List[PacienteRead])
+def listar_pacientes(skip: int = 0, limit: int = 100, db: Session = Depends(get_session)):
+    return repository.list_pacientes(db, skip=skip, limit=limit)
 
 
-@router.post("/", response_model=PatientRead, status_code=status.HTTP_201_CREATED)
-def create_patient(payload: PatientCreate, db: Session = Depends(get_session)):
-    return repository.create_patient(db, payload)
+@router.post("/", response_model=PacienteRead, status_code=status.HTTP_201_CREATED)
+def criar_paciente(payload: PacienteCreate, db: Session = Depends(get_session)):
+    return repository.create_paciente(db, payload)
 
 
-@router.get("/{patient_id}", response_model=PatientRead)
-def get_patient(patient_id: int, db: Session = Depends(get_session)):
-    p = repository.get_patient(db, patient_id)
+@router.get("/{paciente_id}", response_model=PacienteRead)
+def obter_paciente(paciente_id: int, db: Session = Depends(get_session)):
+    p = repository.get_paciente(db, paciente_id)
     if not p:
-        raise HTTPException(status_code=404, detail="Patient not found")
+        raise HTTPException(status_code=404, detail="Paciente não encontrado")
     return p
 
 
-@router.put("/{patient_id}", response_model=PatientRead)
-def update_patient(patient_id: int, payload: PatientUpdate, db: Session = Depends(get_session)):
-    p = repository.update_patient(db, patient_id, payload)
+@router.put("/{paciente_id}", response_model=PacienteRead)
+def atualizar_paciente(paciente_id: int, payload: PacienteUpdate, db: Session = Depends(get_session)):
+    p = repository.update_paciente(db, paciente_id, payload)
     if not p:
-        raise HTTPException(status_code=404, detail="Patient not found")
+        raise HTTPException(status_code=404, detail="Paciente não encontrado")
     return p
 
 
-@router.delete("/{patient_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_patient(patient_id: int, db: Session = Depends(get_session)):
-    ok = repository.delete_patient(db, patient_id)
+@router.delete("/{paciente_id}", status_code=status.HTTP_204_NO_CONTENT)
+def deletar_paciente(paciente_id: int, db: Session = Depends(get_session)):
+    ok = repository.delete_paciente(db, paciente_id)
     if not ok:
-        raise HTTPException(status_code=404, detail="Patient not found")
+        raise HTTPException(status_code=404, detail="Paciente não encontrado")
     return None
