@@ -1,6 +1,5 @@
 # src/models/models.py
-from datetime import date, time, datetime
-from typing import Optional, List
+from datetime import datetime
 
 from sqlalchemy import Column, Integer, String, Float, Boolean, Date, Time, DateTime, ForeignKey, Table
 from sqlalchemy.orm import relationship, declarative_base
@@ -63,7 +62,7 @@ class Plano(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     paciente_id = Column(Integer, ForeignKey("paciente.id"), nullable=False)
-    
+
     data_inicio = Column(Date, nullable=True)
     data_fim = Column(Date, nullable=True)
     objetivo = Column(String, nullable=True)

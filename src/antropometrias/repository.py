@@ -1,6 +1,6 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from antropometrias.schema import AntropometriaCreate, AntropometriaRead, AntropometriaUpdate
+from antropometrias.schema import AntropometriaCreate, AntropometriaUpdate
 from models.models import Antropometria
 
 

@@ -1,6 +1,6 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from planos.schema import PlanoCreate, PlanoRead, PlanoUpdate
+from planos.schema import PlanoCreate, PlanoUpdate
 from models.models import Plano
 
 

@@ -1,6 +1,6 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from pacientes.schema import PacienteCreate, PacienteRead, PacienteUpdate
+from pacientes.schema import PacienteCreate, PacienteUpdate
 from models.models import Paciente
 
 

@@ -1,4 +1,3 @@
-# src/database.py
 import os
 import time
 import logging
@@ -32,7 +31,7 @@ def wait_for_db(max_retries: int = 30, delay: float = 1.0) -> None:
     attempts = 0
     while attempts < max_retries:
         try:
-            with engine.connect() as conn:
+            with engine.connect():
                 logger.info("✅ Conectado ao banco de dados.")
                 return
         except Exception as exc:
