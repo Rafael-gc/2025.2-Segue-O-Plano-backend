@@ -1,6 +1,7 @@
-from pydantic import BaseModel
 from typing import Optional
 from datetime import time
+from pydantic import BaseModel
+
 
 class RefeicaoBase(BaseModel):
     horario: Optional[time] = None

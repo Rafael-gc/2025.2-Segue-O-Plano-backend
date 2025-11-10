@@ -1,1 +1,17 @@
-.venv
+# Ambientes virtuais
+venv/
+.venv/
+
+# Arquivos compilados pelo Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Cache de testes
+.pytest_cache/
+
+# Banco local (se existir)
+db_data/
+
+# Logs
+*.log
